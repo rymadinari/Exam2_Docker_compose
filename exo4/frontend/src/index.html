@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f6f8;
+            padding: 40px;
+        }
+        h1 { text-align: center; }
+        ul {
+            max-width: 400px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            list-style: none;
+        }
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Users</h1>
+<ul id="users"></ul>
+
+<script>
+    fetch("http://localhost:5000/api/users")
+        .then(r => r.json())
+        .then(data => {
+            const ul = document.getElementById("users");
+            data.forEach(u => {
+                ul.innerHTML += `<li>${u.username}</li>`;
+            });
+        });
+</script>
+
+</body>
+</html>
