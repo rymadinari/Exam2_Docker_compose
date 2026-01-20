@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users from Tor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            padding: 30px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .users {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .user {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .user img {
+            border-radius: 50%;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Users from Tor 🌐</h1>
+
+<div class="users" id="users"></div>
+
+<script>
+    fetch("http://localhost:5000/api/users")
+        .then(res => res.json())
+        .then(data => {
+            const container = document.getElementById("users");
+            data.forEach(u => {
+                container.innerHTML += `
+                    <div class="user">
+                        <img src="${u.picture}">
+                        <h3>${u.name}</h3>
+                    </div>
+                `;
+            });
+        })
+        .catch(err => console.error(err));
+</script>
+
+</body>
+</html>
